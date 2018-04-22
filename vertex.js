@@ -166,7 +166,7 @@ class Vertex
             this.y = y,
             this.z = z;
         }
-        shift(P)
+        shift(P) // punkt mille suhtes kujundit 
         {
             return new Vertex(this.x - P.x, this.y - P.y, this.z - P.z);
         }

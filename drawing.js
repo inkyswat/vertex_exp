@@ -20,7 +20,7 @@ window.onload = function(){
     ctx = getCanvas();
     ctx.beginPath();
     ctx.fillstyle = "rgba(255, 0, 0, 0.2)";
-    var spiral = new Spiral(225, 0.078);      
+    var spiral = new Spiral(225, 0.066);      
 }
 class Spiral{
     
