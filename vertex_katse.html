@@ -38,30 +38,32 @@
     var punane = new Polygon_vertex(Polygons_1, "#ff0000");
     stage.add(punane);
 
-// pildi redaktor tee
-
-
-    //
     var roheline = Polygon_vertex.clone(punane, "#00ff00");
-    Polygon_vertex.pan(roheline, 450, 340);
+    Polygon_vertex.pan(roheline, 350, 40);
     stage.add(roheline);
 
     var sinine = Polygon_vertex.clone(punane, "#0000ff");
-    Polygon_vertex.pan(sinine, 450, 0);
+    Polygon_vertex.pan(sinine, 180, 20);
     stage.add(sinine);
 
     var kollane = Polygon_vertex.clone(punane, "#d7e207");
-    Polygon_vertex.pan(kollane, 0, 340);
+    Polygon_vertex.pan(kollane, 30, 170);
     stage.add(kollane);
 
-  
-    Polygon_vertex.rotY(punane, 20 * Vertex.rad());
-    Polygon_vertex.rotZ(punane, 45 * Vertex.rad());
-    Polygon_vertex.rotZ(sinine, -20 * Vertex.rad());
-    Polygon_vertex.rotX(roheline, 65 *Vertex.rad());
-    Polygon_vertex.rotZ(kollane, 20 *Vertex.rad());
-    Polygon_vertex.rotY(kollane, -120 *Vertex.rad());
 
+    Polygon_vertex.rotX(punane, 180 * Vertex.rad());
+    Polygon_vertex.rotX(punane, 0 * Vertex.rad());
+    
+    Polygon_vertex.rotZ(sinine, -60 * Vertex.rad());
+    Polygon_vertex.rotX(sinine, -60 * Vertex.rad());
+    
+    Polygon_vertex.rotX(roheline, 71 *Vertex.rad());
+    Polygon_vertex.rotZ(roheline, 71 *Vertex.rad());
+    Polygon_vertex.rotX(roheline, 71 *Vertex.rad());
+
+    Polygon_vertex.rotZ(kollane, 40 *Vertex.rad());
+    Polygon_vertex.rotY(kollane, 1 * Vertex.rad());
+    Polygon_vertex.rotX(kollane, 70 *Vertex.rad());
     
     //Polygon_vertex.pan(Polygons_3_Obj, -10, 110);
 //    Polygon_vertex.shift(Polygons_3_Obj, Polygon_vertex.midpoint(Polygons_3_Obj));
