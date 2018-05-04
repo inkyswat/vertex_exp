@@ -49,15 +49,6 @@ class Polygon_vertex extends Shape
         }
     }
 
-    static pan_trail(stage, obj, objs_to_create, x_mult, y_mult, color) // vektor in degrees
-    {        
-        var obj_array = [];
-        for (let i = 0; i < objs_to_create; i++) {
-            obj_array[i] = this.clone(obj, color);
-            this.scalar(obj_array[i], i*x_mult, i*y_mult);
-            stage.add(obj_array[i]);
-        }
-    }
 
     static mv(obj, objs_to_create) // input obj is Polygon_vertex object
     {
@@ -83,41 +74,89 @@ class Polygon_vertex extends Shape
         wheels_set_counter++;
 
     }
-    static rotX(obj, theta)
-    {
+    static rotX(obj, theta) {
         var obj_array = [];
         var vertex_array = [];
-        var buff_array = [];
-        for (let i = 0; i < obj.vertex_array.length; i++) 
-        {
+        var vertex_array_mid;
+        var zero_offset = [];
+        for (let i = 0; i < obj.vertex_array.length; i++) {
             vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
-            obj.vertex_array[i] = vertex_array[i].rotX(theta)
-            
+        }
+        vertex_array_mid = Vertex.midpoint(vertex_array);
+
+        for (let i = 0; i < obj.vertex_array.length; i++) {
+            zero_offset[i] = vertex_array[i].shift(vertex_array_mid);
+            vertex_array[i] = zero_offset[i].rotX(theta);
+            obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
     }
 
-    static rotY(obj, theta) 
-    {
+
+    static rotY(obj, theta) {
         var obj_array = [];
         var vertex_array = [];
-        var buff_array = [];
-        for (let i = 0; i < obj.vertex_array.length; i++) 
-        {
+        var vertex_array_mid;
+        var zero_offset = [];
+        for (let i = 0; i < obj.vertex_array.length; i++) {
             vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
-            obj.vertex_array[i] = vertex_array[i].rotY(theta)
+        }
+        vertex_array_mid = Vertex.midpoint(vertex_array);
 
+        for (let i = 0; i < obj.vertex_array.length; i++) {
+            zero_offset[i] = vertex_array[i].shift(vertex_array_mid);
+            vertex_array[i] = zero_offset[i].rotY(theta);
+            obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
     }
+
+
 
     static rotZ(obj, theta) 
     {
         var obj_array = [];
         var vertex_array = [];
-        var buff_array = [];
+        var vertex_array_mid;
+        var zero_offset = [];
         for (let i = 0; i < obj.vertex_array.length; i++) 
         {
             vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
-            obj.vertex_array[i] = vertex_array[i].rotZ(theta)
+        }
+        vertex_array_mid = Vertex.midpoint(vertex_array);
+
+        for (let i = 0; i < obj.vertex_array.length; i++) 
+        {
+            zero_offset[i] = vertex_array[i].shift(vertex_array_mid);
+            vertex_array[i] = zero_offset[i].rotZ(theta);
+            obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
     }
+    static midpoint(obj)
+    {
+        var vertex_array = [];
+        for (var i = 0; i < obj.vertex_array.length; i++) {
+            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
+        }
+        return Vertex.midpoint(vertex_array);        
+    }
+
+    static shift(obj, P) // P => point as vertex
+    {
+        var vertex_array = [];
+        for (var i = 0; i < obj.vertex_array.length; i++) {
+            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
+            obj.vertex_array[i] = vertex_array[i].shift(P);
+        }
+    }
+
+
+    static pan_trail(stage, obj, objs_to_create, x_mult, y_mult, color) // vektor in degrees
+    {
+        var obj_array = [];
+        for (let i = 0; i < objs_to_create; i++) {
+            obj_array[i] = this.clone(obj, color);
+            this.scalar(obj_array[i], i * x_mult, i * y_mult);
+            stage.add(obj_array[i]);
+        }
+    }
+
 }

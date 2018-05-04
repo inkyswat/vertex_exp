@@ -17,11 +17,10 @@
     <script src="class/vertex.js"></script>
     <script src="class/Circle.js"></script>
     <script src="class/polygon_vertex.js"></script>
-    <script src="class/CloneObj.js"></script>
     <!-- <script src="main.js"></script> -->
     <script>
     var stage = new Stage(document.getElementById("canvas"));
-    var circle1 = new Circle(50, 20, 20, "#ff0000");
+    var circle1 = new Circle(stage.canvas.width / 2, stage.canvas.height / 2, 20, "#ff0000");
     stage.add(circle1);
 
     var Polygons_1 = [
@@ -36,51 +35,38 @@
       new Vertex(100, 100, 0),
       new Vertex(40, 10, 0)
     ]
-    var Polygons_1_Obj = new Polygon_vertex(Polygons_1, "#ff0000");
-    stage.add(Polygons_1_Obj);
+    var punane = new Polygon_vertex(Polygons_1, "#ff0000");
+    stage.add(punane);
 
 // pildi redaktor tee
 
 
     //
-    var Polygons_2_Obj = Polygon_vertex.clone(Polygons_1_Obj, "#00ff00");
-    Polygon_vertex.pan(Polygons_2_Obj, 200, 310);
-    //
-    // Polygon_vertex.scalar(Polygons_1_Obj, 1.2, 0.9);
-    stage.add(Polygons_2_Obj);
-    //
-    // var Polygons_3_Obj = Polygon_vertex.clone(Polygons_1_Obj, "#00f0f0");
-    // Polygon_vertex.pan(Polygons_3_Obj, 100, 110);
-    // stage.add(Polygons_3_Obj);
-    //
-    //
-    // var Polygons_4_Obj = Polygon_vertex.clone(Polygons_1_Obj, "#f000ff");
-    // Polygon_vertex.pan(Polygons_4_Obj, 190, 350);
-    // stage.add(Polygons_4_Obj);
-    //
-    // Polygon_vertex.pan_trail(stage, Polygons_2_Obj, 10, 0.2, 0.3, "#4faff0");
-    //
-    // var Polygons_5_Obj = Polygon_vertex.clone(Polygons_1_Obj, "#f000ff");
-    // Polygon_vertex.pan(Polygons_5_Obj, 190, 150);
-// for (let i = 0; i < 2; i++) {
-    Polygon_vertex.pan(Polygons_1_Obj, 10, 300)
-    Polygon_vertex.pan_trail(stage, Polygons_1_Obj, 10, 0.15, 0.07, "#555");
-// }
-// console.log(180*Vertex.rad());
-    Polygon_vertex.rotZ(Polygons_2_Obj, -10*Vertex.rad());
-    // stage.add(Polygons_2_Obj);
-    var Polygons_3_Obj = Polygon_vertex.clone(Polygons_2_Obj, "#f0af00");
-    Polygon_vertex.rotY(Polygons_3_Obj, 60*Vertex.rad());
-    stage.add(Polygons_3_Obj);
-    var Polygons_4_Obj = Polygon_vertex.clone(Polygons_2_Obj, "#a0af30");
-    Polygon_vertex.rotX(Polygons_4_Obj, 20*Vertex.rad());
-    Polygon_vertex.rotZ(Polygons_4_Obj, -80*Vertex.rad());
-    Polygon_vertex.pan(Polygons_4_Obj, 10, 410);
-    Polygon_vertex.rotZ(Polygons_3_Obj, 70*Vertex.rad());
+    var roheline = Polygon_vertex.clone(punane, "#00ff00");
+    Polygon_vertex.pan(roheline, 450, 340);
+    stage.add(roheline);
 
-    Polygon_vertex.pan(Polygons_3_Obj, 730, 0);
+    var sinine = Polygon_vertex.clone(punane, "#0000ff");
+    Polygon_vertex.pan(sinine, 450, 0);
+    stage.add(sinine);
 
-    stage.add(Polygons_4_Obj);
+    var kollane = Polygon_vertex.clone(punane, "#d7e207");
+    Polygon_vertex.pan(kollane, 0, 340);
+    stage.add(kollane);
+
+  
+    Polygon_vertex.rotY(punane, 20 * Vertex.rad());
+    Polygon_vertex.rotZ(punane, 45 * Vertex.rad());
+    Polygon_vertex.rotZ(sinine, -20 * Vertex.rad());
+    Polygon_vertex.rotX(roheline, 65 *Vertex.rad());
+    Polygon_vertex.rotZ(kollane, 20 *Vertex.rad());
+    Polygon_vertex.rotY(kollane, -120 *Vertex.rad());
+
+    
+    //Polygon_vertex.pan(Polygons_3_Obj, -10, 110);
+//    Polygon_vertex.shift(Polygons_3_Obj, Polygon_vertex.midpoint(Polygons_3_Obj));
+
+    
 // Scale object 1
 
     </script>

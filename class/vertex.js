@@ -232,4 +232,10 @@ class Vertex
         project(depth){
         return new Verticle(this.x/depth,this.y/depth);
         }
+        // minu lisatud
+        shiftPlus(P) // punkt mille suhtes kujundit 
+        {
+            return new Vertex(this.x + P.x, this.y + P.y, this.z + P.z);
+        }
+
     }
