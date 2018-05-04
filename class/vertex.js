@@ -1,12 +1,38 @@
 class Vertex
-    {
+    {        
         static rad(){return 0.017453292519943295};//Math.PI / 180};
+        constructor(x, y, z) {
+            if (typeof (y) === 'undefined') 
+            {
+                if (typeof (x.x) === 'undefined') 
+                { // testib, et pole punktiga notatsioon, et pole objekt
+                    this.x = x[0],//[0],
+                    this.y = x[1],//[1],
+                    this.z = x[2];//[2];   
+                }
+
+                else 
+                {
+                    this.x = x.x,//[0],
+                    this.y = x.y,//[1],
+                    this.z = x.z;//[2];       
+                }
+            }
+
+            else 
+            {
+                this.x = x,
+                this.y = y,
+                this.z = z
+            };
+        }
         static custom(P)
         {
              if (typeof(P.x) === 'undefined')
             {
                 return {x:P[0], y:P[1], z:P[2]};
             }
+
             else 
             {
                 return P;
@@ -49,8 +75,8 @@ class Vertex
             */
         }
         
-        static cAngle(p1, p2)
-        {
+        static cAngle(p1, p2) // static tähendab, saab kõikide objektide pea. statickul pole individuaalset parameetrit
+        { 
             let v = Vertex.scale(0.5,Vertex.vector(p1, p2));
             let ll = v.x * v.x + v.y * v.y + v.z * v.z;
             return 2 * Math.atan(Math.sqrt(ll / 3));
@@ -136,30 +162,6 @@ class Vertex
                 let point = [A.x + t * beam.x, A.y + t * beam.y, A.z + t * beam.z];
                 return point;
             }
-        constructor(x, y, z) 
-        {
-            if(typeof(y) === 'undefined')
-            {
-                if(typeof(x.x) === 'undefined')
-                {
-                this.x = x[0],//[0],
-                this.y = x[1],//[1],
-                this.z = x[2];//[2];   
-                }
-                else
-                {
-                this.x = x.x,//[0],
-                this.y = x.y,//[1],
-                this.z = x.z;//[2];       
-                }
-            } 
-            else
-            {
-            this.x = x,
-            this.y = y,
-            this.z = z
-            };
-        }
         set(x, y, z)
         {
             this.x = x,
@@ -174,7 +176,7 @@ class Vertex
         {
             this.set(this.x + x, this.y + y, this.z + z);
         }
-        add(V)
+        add(V) // annad ette vektori objektina { x:, y:, z: }, pmst sama mis pan, kuid saab vertex objektina sisestada
         {
             this.set(this.x + V.x, this.y + V.y, this.z + V.z);
         }
@@ -183,7 +185,8 @@ class Vertex
         {
             this.set(this.x - V.x, this.y - V.y, this.z - V.z);    
         }
-        scalar(x, y, z){
+        scalar(x, y, z) // korrutab läbi
+        {
             return new Vertex(
             x * this.x,
             y * this.y,
