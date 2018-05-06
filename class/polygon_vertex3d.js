@@ -1,4 +1,4 @@
-class Polygon_vertex extends Shape
+class Polygon_vertex3d extends Shape
 {
     constructor(vertex_array, color) 
     {
@@ -9,18 +9,19 @@ class Polygon_vertex extends Shape
     draw(ctx)
     {
         ctx.beginPath();
-        ctx.moveTo(this.vertex_array[0].x, this.vertex_array[0].y);
-        for (let i = 1; i < this.vertex_array.length; i++) 
         {
+            ctx.moveTo(this.vertex_array[0].x, this.vertex_array[0].y);
+            for (let i = 1; i < this.vertex_array.length; i++) {
+                ctx.fillStyle = this.getColor();
+                ctx.strokeStyle = this.getColor();
+                ctx.lineTo(this.vertex_array[i].x, this.vertex_array[i].y);
+                ctx.stroke();
+            }
             ctx.fillStyle = this.getColor();
-            ctx.strokeStyle = this.getColor();
-            ctx.lineTo(this.vertex_array[i].x, this.vertex_array[i].y);
+            ctx.lineTo(this.vertex_array[0].x, this.vertex_array[0].y);
             ctx.stroke();
-        }
-        ctx.fillStyle = this.getColor();
-        ctx.lineTo(this.vertex_array[0].x, this.vertex_array[0].y);
-        ctx.stroke();
 
+        }
     }
 
     static clone(obj, color) // dependant on vertex.js
@@ -30,27 +31,37 @@ class Polygon_vertex extends Shape
         {
             vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
         }
-        var Polygon_vertexClone = new Polygon_vertex(vertex_array, color);
-        return Polygon_vertexClone;
+        var Polygon_vertex2dClone = new Polygon_vertex2d(vertex_array, color);
+        return Polygon_vertex2dClone;
     }
 
-    static scalar(obj, x, y)
-    {
+    static monoscale(obj, x) // millegi pärast keerab rotX ja rotY pekki kui loop'ida koos
+    { // uus idee Midpoint keerab nahka, kuna kokku pressituna raadius on väiksem ja theta hulk keeramisega vähendab iga korraga raadiust
+        var vertex_array = [];
+        var vertex_array_mid;
+        var zero_offset = [];
+        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+console.log(vertex_array_mid);
+
         for (var i = 0; i < obj.vertex_array.length; i++)
         {
-            obj.vertex_array[i] = obj.vertex_array[i].scalar(x, y, 0);
+            zero_offset[i] = obj.vertex_array[i].shift(vertex_array_mid);
+            vertex_array[i] = new Vertex(zero_offset[i].x * x, zero_offset[i].y * x, 0);   
+            obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
+    
     }
 
     static pan(obj, x, y)
     {
-        for (var i = 0; i < obj.vertex_array.length; i++) {
+        for (var i = 0; i < obj.vertex_array.length; i++) 
+        {
             obj.vertex_array[i].pan(x, y, 0);
         }
     }
 
 
-    static mv(obj, objs_to_create) // input obj is Polygon_vertex object
+    static mv(obj, objs_to_create) // input obj is Polygon_vertex2d object
     {
         var objs_to_create = 50;
         //wheels.splice(0, objs_to_create);
@@ -74,66 +85,66 @@ class Polygon_vertex extends Shape
         wheels_set_counter++;
 
     }
-    static rotX(obj, theta) {
-        var obj_array = [];
+    static rotX(obj, theta) 
+    {
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        for (let i = 0; i < obj.vertex_array.length; i++) {
-            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
-        }
-        vertex_array_mid = Vertex.midpoint(vertex_array);
+        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+        vertex_array_mid.x = parseInt(vertex_array_mid.x);
+        vertex_array_mid.y = parseInt(vertex_array_mid.y);
 
-        for (let i = 0; i < obj.vertex_array.length; i++) {
-            zero_offset[i] = vertex_array[i].shift(vertex_array_mid);
+        for (let i = 0; i < obj.vertex_array.length; i++) 
+        {
+            zero_offset[i] = obj.vertex_array[i].shift(vertex_array_mid);
             vertex_array[i] = zero_offset[i].rotX(theta);
             obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
     }
 
 
-    static rotY(obj, theta) {
-        var obj_array = [];
+    static rotY(obj, theta) 
+    {
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        for (let i = 0; i < obj.vertex_array.length; i++) {
-            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
-        }
-        vertex_array_mid = Vertex.midpoint(vertex_array);
-
-        for (let i = 0; i < obj.vertex_array.length; i++) {
-            zero_offset[i] = vertex_array[i].shift(vertex_array_mid);
+        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+        vertex_array_mid.x = parseInt(vertex_array_mid.x);
+        vertex_array_mid.y = parseInt(vertex_array_mid.y);
+        
+        for (let i = 0; i < obj.vertex_array.length; i++) 
+        {
+            zero_offset[i] = obj.vertex_array[i].shift(vertex_array_mid);
             vertex_array[i] = zero_offset[i].rotY(theta);
             obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
+        
     }
 
 
 
     static rotZ(obj, theta) 
     {
-        var obj_array = [];
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        for (let i = 0; i < obj.vertex_array.length; i++) 
-        {
-            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
-        }
-        vertex_array_mid = Vertex.midpoint(vertex_array);
+        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+        vertex_array_mid.x = parseInt(vertex_array_mid.x);
+        vertex_array_mid.y = parseInt(vertex_array_mid.y);
 
         for (let i = 0; i < obj.vertex_array.length; i++) 
         {
-            zero_offset[i] = vertex_array[i].shift(vertex_array_mid);
+            zero_offset[i] = obj.vertex_array[i].shift(vertex_array_mid);
             vertex_array[i] = zero_offset[i].rotZ(theta);
             obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
     }
+
     static midpoint(obj)
     {
         var vertex_array = [];
-        for (var i = 0; i < obj.vertex_array.length; i++) {
+        for (var i = 0; i < obj.vertex_array.length; i++) 
+        {
             vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
         }
         return Vertex.midpoint(vertex_array);        
@@ -142,7 +153,8 @@ class Polygon_vertex extends Shape
     static shift(obj, P) // P => point as vertex
     {
         var vertex_array = [];
-        for (var i = 0; i < obj.vertex_array.length; i++) {
+        for (var i = 0; i < obj.vertex_array.length; i++) 
+        {
             vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
             obj.vertex_array[i] = vertex_array[i].shift(P);
         }
@@ -152,11 +164,21 @@ class Polygon_vertex extends Shape
     static pan_trail(stage, obj, objs_to_create, x_mult, y_mult, color) // vektor in degrees
     {
         var obj_array = [];
-        for (let i = 0; i < objs_to_create; i++) {
+        for (let i = 0; i < objs_to_create; i++)
+        {
             obj_array[i] = this.clone(obj, color);
             this.scalar(obj_array[i], i * x_mult, i * y_mult);
             stage.add(obj_array[i]);
         }
     }
+    projection3d(obj, depth)
+    {
+        for(let i = 0; i < obj.vertex_array.length; i++) 
+        {
+            cube_polygons[i] = obj.vertex_array[i].project(depth);
+
+        }
+    }
+
 
 }

@@ -16,7 +16,8 @@
     <script src="class/Shape.js"></script>
     <script src="class/vertex.js"></script>
     <script src="class/Circle.js"></script>
-    <script src="class/polygon_vertex.js"></script>
+    <script src="class/Polygon_vertex2d.js"></script>
+    <script src="class/verticle.js"></script>
     <!-- <script src="main.js"></script> -->
     <script>
     var stage = new Stage(document.getElementById("canvas"));
@@ -34,39 +35,102 @@
       new Vertex(100, 10, 0),
       new Vertex(100, 100, 0),
       new Vertex(40, 10, 0)
-    ]
-    var punane = new Polygon_vertex(Polygons_1, "#ff0000");
-    stage.add(punane);
-
-    var roheline = Polygon_vertex.clone(punane, "#00ff00");
-    Polygon_vertex.pan(roheline, 350, 40);
-    stage.add(roheline);
-
-    var sinine = Polygon_vertex.clone(punane, "#0000ff");
-    Polygon_vertex.pan(sinine, 180, 20);
-    stage.add(sinine);
-
-    var kollane = Polygon_vertex.clone(punane, "#d7e207");
-    Polygon_vertex.pan(kollane, 30, 170);
-    stage.add(kollane);
-
-
-    Polygon_vertex.rotX(punane, 180 * Vertex.rad());
-    Polygon_vertex.rotX(punane, 0 * Vertex.rad());
+    ];
     
-    Polygon_vertex.rotZ(sinine, -60 * Vertex.rad());
-    Polygon_vertex.rotX(sinine, -60 * Vertex.rad());
-    
-    Polygon_vertex.rotX(roheline, 71 *Vertex.rad());
-    Polygon_vertex.rotZ(roheline, 71 *Vertex.rad());
-    Polygon_vertex.rotX(roheline, 71 *Vertex.rad());
 
-    Polygon_vertex.rotZ(kollane, 40 *Vertex.rad());
-    Polygon_vertex.rotY(kollane, 1 * Vertex.rad());
-    Polygon_vertex.rotX(kollane, 70 *Vertex.rad());
+    var cube_polygons = [
+        new Vertex(-80, -80, -80),
+        new Vertex(80, -80, -80),
+        new Vertex(80, 80, -80),
+        new Vertex(-80, 80, -80),
+        new Vertex(-80, 80, 80),
+        new Vertex(80, 80, 80),
+        new Vertex(80, -80, 80),
+        new Vertex(-80, -80, 80)
+      ];
+
+
+    var cube = new Polygon_vertex2d(cube_polygons, "#ff0000");
     
-    //Polygon_vertex.pan(Polygons_3_Obj, -10, 110);
-//    Polygon_vertex.shift(Polygons_3_Obj, Polygon_vertex.midpoint(Polygons_3_Obj));
+    stage.add(cube);
+
+
+    
+    var punane = new Polygon_vertex2d(Polygons_1, "#ff0000");
+   // stage.add(punane);
+Polygon_vertex2d.pan(punane, 100, 100);
+    Polygon_vertex2d.monoscale(cube, 2);
+    
+    var pruun = Polygon_vertex2d.clone(punane, "#ff0000");
+    stage.add(pruun);
+  
+    var pruun2 = Polygon_vertex2d.clone(punane, "#ff0050");
+    stage.add(pruun2);
+
+    var pruun3 = Polygon_vertex2d.clone(punane, "#4f8000");
+    stage.add(pruun3);
+
+    var pruun4 = Polygon_vertex2d.clone(punane, "#b05050");
+    stage.add(pruun4);
+
+
+var pruun_ = setInterval(rotatePruun, 16.6666);
+
+
+  function rotatePruun() {
+      Polygon_vertex2d.rotZ(pruun, 3 * Vertex.rad());
+      Polygon_vertex2d.rotZ(pruun2, 2.9 * Vertex.rad());
+      Polygon_vertex2d.rotZ(pruun3, 2.8 * Vertex.rad());
+      Polygon_vertex2d.rotZ(pruun4, 2.7 * Vertex.rad());
+        // Polygon_vertex2d.rotX(pruun, 0 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun, 3 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun3, 2.7 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun4, 2.6 * Vertex.rad());
+
+    Polygon_vertex2d.rotX(pruun, 3 * Vertex.rad());
+    Polygon_vertex2d.rotX(pruun2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotX(pruun3, 2.7 * Vertex.rad());
+    Polygon_vertex2d.rotX(pruun4, 2.6 * Vertex.rad());
+        // Polygon_vertex2d.rotX(pruun, -0.1 * Vertex.rad());
+      // Polygon_vertex2d.rotZ(pruun, -0.1 * Vertex.rad());
+      // Polygon_vertex2d.rotZ(pruun, -0.1 * Vertex.rad());
+      // Polygon_vertex2d.rotZ(pruun, -0.1 * Vertex.rad());
+      // Polygon_vertex2d.rotZ(pruun, -1 * Vertex.rad());
+
+    //  Polygon_vertex2d.pan(pruun, 0.1, 0);
+     //Polygon_vertex2d.monoscale(pruun, 1.01);
+  //  Polygon_vertex2d.rotX(pruun, 0.5 * Vertex.rad());
+    // Polygon_vertex2d.rotZ(punane, 2.5 * Vertex.rad());
+    // Polygon_vertex2d.rotX(punane, 5 * Vertex.rad());
+    // Polygon_vertex2d.pan(punane, 1, 2);
+
+  }
+
+  setTimeout(() => {
+    clearInterval(pruun_);
+  }, 20000);
+
+
+window.addEventListener("mousedown", function () {
+    // Polygon_vertex2d.rotZ(punane, 5 * Vertex.rad());
+    // Polygon_vertex2d.rotX(punane, 15 * Vertex.rad());
+  // Polygon_vertex2d.monoscale(punane, 1.1);
+  Polygon_vertex2d.rotX(punane, 0 * Vertex.rad());
+  
+  console.log(punane.vertex_array_zero_based[0]);
+
+  //Polygon_vertex2d.monoscale(pruun, 1.01);
+
+
+  });
+    
+    
+    
+    //Vertex.plane(p1, p2, p3)// PLANE parameters by 3 points
+
+    //Polygon_vertex2d.pan(Polygons_3_Obj, -10, 110);
+//    Polygon_vertex2d.shift(Polygons_3_Obj, Polygon_vertex2d.midpoint(Polygons_3_Obj));
 
     
 // Scale object 1

@@ -13,9 +13,11 @@ class Stage {
 	add(obj) {
 		this.children.push(obj);
 	}
-	draw() {
+	draw() 
+	{
 		this.ctx.clearRect(0, 0 ,this.canvas.width, this.canvas.height); // joonistab koguaeg arrays olevaid objekte
-		for(var i = 0; i < this.children.length; i++) {
+		for(var i = 0; i < this.children.length; i++) 
+		{
 			this.children[i].draw(this.ctx);
 		}
 		requestAnimationFrame(this.draw);

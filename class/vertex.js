@@ -86,7 +86,7 @@ class Vertex
             let P = Vertex.custom(p);
             return new Vertex(P.x * a, P.y * a, P.z * a);
         }
-        static  midpoint(PolyV)
+        static  midpoint(PolyV) // leiab polygonide keskpunkti
         {
             let x = PolyV[0].x,
                 y = PolyV[0].y,
@@ -119,6 +119,14 @@ class Vertex
             }
             return convey;
         }
+
+        monoscale(x)
+        {
+            this.x = this.x * x;
+            this.y = this.y * x;
+            this.z = this.z * x;
+        }
+
         static dist(A, B)
         {
             let V;
@@ -132,7 +140,7 @@ class Vertex
             }
             return Math.sqrt(V.x * V.x + V.y * V.y + V.z * V.z);
         }
-        static normal(v1,v2)// NORMAL to two vectors
+        static normal(v1,v2)// Kahele vektorile normaalvektori leidmine
             { //third point is 0,0,0 - both vectors there
                 let a = v1.y * v2.z - v1.z * v2.y;
                 let b = -(v1.x * v2.z - v1.z * v2.x);
@@ -140,7 +148,7 @@ class Vertex
                 return {x:a,y:b,z:c};
             }
         static plane(p1, p2, p3)// PLANE parameters by 3 points
-            {
+            { // tagastab normaalvektori – kolm punkti sisendiks
                 let V1 = Vertex.vector(p1, p2);//{x:p2.x - p1.x, y:p2.y - p1.y, z:p2.z - p1.z};
                 let V2 = Vertex.vector(p1, p3);//{x:p3.x - p1.x, y:p3.y - p1.y, z:p3.z - p1.z};
                 let N = Vertex.normal(V1, V2);
@@ -168,7 +176,7 @@ class Vertex
             this.y = y,
             this.z = z;
         }
-        shift(P) // punkt mille suhtes kujundit 
+        shift(P) // punkt mille suhtes kujundit nihutada 
         {
             return new Vertex(this.x - P.x, this.y - P.y, this.z - P.z);
         }
@@ -229,9 +237,11 @@ class Vertex
                 z
             );
         }  
-        project(depth){
+        project(depth){ // input for z coordinate
         return new Verticle(this.x/depth,this.y/depth);
         }
+
+
         // minu lisatud
         shiftPlus(P) // punkt mille suhtes kujundit 
         {
