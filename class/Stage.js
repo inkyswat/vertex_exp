@@ -4,7 +4,9 @@ class Stage {
 		this.canvas.width = width || this.canvas.width;
 		this.canvas.height = height || this.canvas.height;
 		this.ctx = this.canvas.getContext("2d");
-
+		this.canvasPosition = canvas.getBoundingClientRect();
+		
+		
 		this.children = [];
 		this.draw = this.draw.bind(this); // bind on selleks, et requestAnimationFrame võtaks Stage.Draw'i parameetrina, vastasel juhul võtaks requestAnimationFrame'i enda seest draw'i mida ei eksisteeri
 		this.draw();

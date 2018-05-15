@@ -5,7 +5,7 @@ class Vertex
             if (typeof (y) === 'undefined') 
             {
                 if (typeof (x.x) === 'undefined') 
-                { // testib, et pole punktiga notatsioon, et pole objekt
+                { // testib, et pole punktiga notatsioon -> pole objekt
                     this.x = x[0],//[0],
                     this.y = x[1],//[1],
                     this.z = x[2];//[2];   
