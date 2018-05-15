@@ -56,6 +56,7 @@ class Polygon_vertex2d extends Shape
         for (var i = 0; i < obj.vertex_array.length; i++) 
         {
             obj.vertex_array[i].pan(x, y, 0);
+            obj.vertex_array_zero_based[i].pan(x, y, 0);
       //      obj.vertex_array[i].add(x, y, 0);
         }
     }

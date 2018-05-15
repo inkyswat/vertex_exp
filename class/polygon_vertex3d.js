@@ -29,10 +29,10 @@ class Polygon_vertex3d extends Shape
         var vertex_array = [];
         for (var i = 0; i < obj.vertex_array.length; i++) 
         {
-            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
+            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, obj.vertex_array[i].z);
         }
-        var Polygon_vertex2dClone = new Polygon_vertex2d(vertex_array, color);
-        return Polygon_vertex2dClone;
+        var Polygon_vertex3dClone = new Polygon_vertex3d(vertex_array, color);
+        return Polygon_vertex3dClone;
     }
 
     static monoscale(obj, x) // millegi pärast keerab rotX ja rotY pekki kui loop'ida koos
@@ -40,28 +40,30 @@ class Polygon_vertex3d extends Shape
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
-console.log(vertex_array_mid);
+        vertex_array_mid = Polygon_vertex3d.midpoint(obj);
+        vertex_array_mid.x = parseInt(vertex_array_mid.x);
+        vertex_array_mid.y = parseInt(vertex_array_mid.y);
+        vertex_array_mid.z = parseInt(vertex_array_mid.z);
 
         for (var i = 0; i < obj.vertex_array.length; i++)
         {
             zero_offset[i] = obj.vertex_array[i].shift(vertex_array_mid);
-            vertex_array[i] = new Vertex(zero_offset[i].x * x, zero_offset[i].y * x, 0);   
+            vertex_array[i] = new Vertex(zero_offset[i].x * x, zero_offset[i].y * x, zero_offset[i].z * x);   
             obj.vertex_array[i] = vertex_array[i].shiftPlus(vertex_array_mid);
         }
     
     }
 
-    static pan(obj, x, y)
+    static pan(obj, x, y, z)
     {
         for (var i = 0; i < obj.vertex_array.length; i++) 
         {
-            obj.vertex_array[i].pan(x, y, 0);
+            obj.vertex_array[i].pan(x, y, z);
         }
     }
 
 
-    static mv(obj, objs_to_create) // input obj is Polygon_vertex2d object
+    static mv(obj, objs_to_create) // input obj is Polygon_vertex3d object
     {
         var objs_to_create = 50;
         //wheels.splice(0, objs_to_create);
@@ -90,9 +92,10 @@ console.log(vertex_array_mid);
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+        vertex_array_mid = Polygon_vertex3d.midpoint(obj);
         vertex_array_mid.x = parseInt(vertex_array_mid.x);
         vertex_array_mid.y = parseInt(vertex_array_mid.y);
+        vertex_array_mid.z = parseInt(vertex_array_mid.z);
 
         for (let i = 0; i < obj.vertex_array.length; i++) 
         {
@@ -108,9 +111,10 @@ console.log(vertex_array_mid);
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+        vertex_array_mid = Polygon_vertex3d.midpoint(obj);
         vertex_array_mid.x = parseInt(vertex_array_mid.x);
         vertex_array_mid.y = parseInt(vertex_array_mid.y);
+        vertex_array_mid.z = parseInt(vertex_array_mid.z);
         
         for (let i = 0; i < obj.vertex_array.length; i++) 
         {
@@ -128,9 +132,10 @@ console.log(vertex_array_mid);
         var vertex_array = [];
         var vertex_array_mid;
         var zero_offset = [];
-        vertex_array_mid = Polygon_vertex2d.midpoint(obj);
+        vertex_array_mid = Polygon_vertex3d.midpoint(obj);
         vertex_array_mid.x = parseInt(vertex_array_mid.x);
         vertex_array_mid.y = parseInt(vertex_array_mid.y);
+        vertex_array_mid.z = parseInt(vertex_array_mid.z);
 
         for (let i = 0; i < obj.vertex_array.length; i++) 
         {
@@ -145,7 +150,7 @@ console.log(vertex_array_mid);
         var vertex_array = [];
         for (var i = 0; i < obj.vertex_array.length; i++) 
         {
-            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
+            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, obj.vertex_array[i].z);
         }
         return Vertex.midpoint(vertex_array);        
     }
@@ -155,19 +160,19 @@ console.log(vertex_array_mid);
         var vertex_array = [];
         for (var i = 0; i < obj.vertex_array.length; i++) 
         {
-            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, 0);
+            vertex_array[i] = new Vertex(obj.vertex_array[i].x, obj.vertex_array[i].y, obj.vertex_array[i].y);
             obj.vertex_array[i] = vertex_array[i].shift(P);
         }
     }
 
 
-    static pan_trail(stage, obj, objs_to_create, x_mult, y_mult, color) // vektor in degrees
+    static pan_trail(stage, obj, objs_to_create, x_mult, y_mult, z_mult, color) // vektor in degrees
     {
         var obj_array = [];
         for (let i = 0; i < objs_to_create; i++)
         {
             obj_array[i] = this.clone(obj, color);
-            this.scalar(obj_array[i], i * x_mult, i * y_mult);
+            this.scalar(obj_array[i], i * x_mult, i * y_mult, i * z_mult);
             stage.add(obj_array[i]);
         }
     }

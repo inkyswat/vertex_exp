@@ -86,7 +86,7 @@ class Vertex
             let P = Vertex.custom(p);
             return new Vertex(P.x * a, P.y * a, P.z * a);
         }
-        static  midpoint(PolyV) // leiab polygonide keskpunkti
+        static midpoint(PolyV) // leiab polygonide keskpunkti
         {
             let x = PolyV[0].x,
                 y = PolyV[0].y,

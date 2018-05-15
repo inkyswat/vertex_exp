@@ -22,7 +22,11 @@
     <script>
     var stage = new Stage(document.getElementById("canvas"));
     var circle1 = new Circle(stage.canvas.width / 2, stage.canvas.height / 2, 20, "#ff0000");
+    var circle2 = new Circle(stage.canvas.width / 2, stage.canvas.height / 2, 20, "#00ff00");
+    var circle3 = new Circle(stage.canvas.width / 2, stage.canvas.height / 2, 20, "#0000ff");
     stage.add(circle1);
+    stage.add(circle2);
+    stage.add(circle3);
 
     var Polygons_1 = [
       new Vertex(10, 10, 0),
@@ -52,7 +56,7 @@
 
     var cube = new Polygon_vertex2d(cube_polygons, "#ff0000");
     
-    stage.add(cube);
+  //  stage.add(cube);
 
 
     
@@ -63,53 +67,121 @@ Polygon_vertex2d.pan(punane, 100, 100);
     
     var pruun = Polygon_vertex2d.clone(punane, "#ff0000");
     stage.add(pruun);
-  
-    var pruun2 = Polygon_vertex2d.clone(punane, "#ff0050");
+    var pruun2 = Polygon_vertex2d.clone(punane, "#bf0000");
     stage.add(pruun2);
-
-    var pruun3 = Polygon_vertex2d.clone(punane, "#4f8000");
+    var pruun3 = Polygon_vertex2d.clone(punane, "#8f000");
     stage.add(pruun3);
-
-    var pruun4 = Polygon_vertex2d.clone(punane, "#b05050");
+    var pruun4 = Polygon_vertex2d.clone(punane, "#4f0000");
     stage.add(pruun4);
+
+    var roheline = Polygon_vertex2d.clone(punane, "#0ff000");
+    //stage.add(roheline);
+    Polygon_vertex2d.pan(roheline, 0, 200);
+    var roheline2 = Polygon_vertex2d.clone(roheline, "#00ff00");
+    stage.add(roheline2);
+    var roheline3 = Polygon_vertex2d.clone(roheline, "#00bf00");
+    stage.add(roheline3);
+
+    var roheline4 = Polygon_vertex2d.clone(roheline, "#004f00");
+    stage.add(roheline4);
+
+    var roheline5 = Polygon_vertex2d.clone(roheline, "#004f00");
+    stage.add(roheline5);
+
+    var sinine = Polygon_vertex2d.clone(punane, "#0ff000");
+    //stage.add(roheline);
+    Polygon_vertex2d.pan(sinine, 240, 0);
+    var sinine2 = Polygon_vertex2d.clone(sinine, "#0000ff");
+    stage.add(sinine2);
+    var sinine3 = Polygon_vertex2d.clone(sinine, "#0000bf");
+    stage.add(sinine3);
+
+    var sinine4 = Polygon_vertex2d.clone(sinine, "#00004f");
+    stage.add(sinine4);
+
+    var sinine5 = Polygon_vertex2d.clone(sinine, "#00004f");
+    stage.add(sinine5);
+
+    var segu = Polygon_vertex2d.clone(punane, "#0ff000");
+    //stage.add(roheline);
+    Polygon_vertex2d.pan(segu, 220, 230);
+    var segu2 = Polygon_vertex2d.clone(segu, "#f000ff");
+    stage.add(segu2);
+    var segu3 = Polygon_vertex2d.clone(segu, "#0f0bf");
+    stage.add(segu3);
+
+    var segu4 = Polygon_vertex2d.clone(segu, "#70704f");
+    stage.add(segu4);
+
+    var segu5 = Polygon_vertex2d.clone(segu, "#30b04f");
+    stage.add(segu5);
 
 
 var pruun_ = setInterval(rotatePruun, 16.6666);
 
 
   function rotatePruun() {
-      Polygon_vertex2d.rotZ(pruun, 3 * Vertex.rad());
-      Polygon_vertex2d.rotZ(pruun2, 2.9 * Vertex.rad());
-      Polygon_vertex2d.rotZ(pruun3, 2.8 * Vertex.rad());
-      Polygon_vertex2d.rotZ(pruun4, 2.7 * Vertex.rad());
-        // Polygon_vertex2d.rotX(pruun, 0 * Vertex.rad());
-    Polygon_vertex2d.rotY(pruun, 3 * Vertex.rad());
-    Polygon_vertex2d.rotY(pruun2, 2.9 * Vertex.rad());
-    Polygon_vertex2d.rotY(pruun3, 2.7 * Vertex.rad());
-    Polygon_vertex2d.rotY(pruun4, 2.6 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun2, 2.85 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun3, 2.8 * Vertex.rad());
+    Polygon_vertex2d.rotY(pruun4, 2.75 * Vertex.rad());
+    
+    Polygon_vertex2d.rotX(roheline2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotX(roheline3, 2.85 * Vertex.rad());
+    Polygon_vertex2d.rotX(roheline4, 2.8 * Vertex.rad());
+    Polygon_vertex2d.rotX(roheline5, 2.75 * Vertex.rad());
 
-    Polygon_vertex2d.rotX(pruun, 3 * Vertex.rad());
-    Polygon_vertex2d.rotX(pruun2, 2.9 * Vertex.rad());
-    Polygon_vertex2d.rotX(pruun3, 2.7 * Vertex.rad());
-    Polygon_vertex2d.rotX(pruun4, 2.6 * Vertex.rad());
-        // Polygon_vertex2d.rotX(pruun, -0.1 * Vertex.rad());
-      // Polygon_vertex2d.rotZ(pruun, -0.1 * Vertex.rad());
-      // Polygon_vertex2d.rotZ(pruun, -0.1 * Vertex.rad());
-      // Polygon_vertex2d.rotZ(pruun, -0.1 * Vertex.rad());
-      // Polygon_vertex2d.rotZ(pruun, -1 * Vertex.rad());
+    Polygon_vertex2d.rotZ(sinine2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotZ(sinine3, 2.85 * Vertex.rad());
+    Polygon_vertex2d.rotZ(sinine4, 2.8 * Vertex.rad());
+    Polygon_vertex2d.rotZ(sinine5, 2.75 * Vertex.rad());
 
-    //  Polygon_vertex2d.pan(pruun, 0.1, 0);
-     //Polygon_vertex2d.monoscale(pruun, 1.01);
-  //  Polygon_vertex2d.rotX(pruun, 0.5 * Vertex.rad());
-    // Polygon_vertex2d.rotZ(punane, 2.5 * Vertex.rad());
-    // Polygon_vertex2d.rotX(punane, 5 * Vertex.rad());
-    // Polygon_vertex2d.pan(punane, 1, 2);
+    Polygon_vertex2d.pan(roheline2, 0, -4);
+    Polygon_vertex2d.pan(roheline3, 0, -3);
+    Polygon_vertex2d.pan(roheline4, 0, -2);
+    Polygon_vertex2d.pan(roheline5, 0, -1);
+
+    Polygon_vertex2d.pan(pruun, 1, 0);
+    Polygon_vertex2d.pan(pruun2, 2, 0);
+    Polygon_vertex2d.pan(pruun3, 3, 0);
+    Polygon_vertex2d.pan(pruun4, 4, 0);
+    circle1.x = 300 + 600*(Math.random()-0.5);
+    circle1.y = 15 + 60*(Math.random()-0.1);
+    circle1.radius = 40*Math.random();
+
+    circle2.x = 300 + 600 * (Math.random() - 0.5);
+    circle2.y = 30 + 60 * (Math.random() - 0.1);
+    circle2.radius = 40 * Math.random();
+    
+    circle3.x = 300 + 600 * (Math.random() - 0.5);
+    circle3.y = 45 + 60 * (Math.random() - 0.1);
+    circle3.radius = 40 * Math.random();
+
+    Polygon_vertex2d.rotX(segu2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotX(segu3, 2.85 * Vertex.rad());
+    Polygon_vertex2d.rotX(segu4, 2.8 * Vertex.rad());
+    Polygon_vertex2d.rotX(segu5, 2.75 * Vertex.rad());
+
+    Polygon_vertex2d.rotY(segu2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotY(segu3, 2.85 * Vertex.rad());
+    Polygon_vertex2d.rotY(segu4, 2.8 * Vertex.rad());
+    Polygon_vertex2d.rotY(segu5, 2.75 * Vertex.rad());
+
+    Polygon_vertex2d.rotZ(segu2, 2.9 * Vertex.rad());
+    Polygon_vertex2d.rotZ(segu3, 2.85 * Vertex.rad());
+    Polygon_vertex2d.rotZ(segu4, 2.8 * Vertex.rad());
+    Polygon_vertex2d.rotZ(segu5, 2.75 * Vertex.rad());
+
+    Polygon_vertex2d.pan(segu2, 0, -0.5);
+    Polygon_vertex2d.pan(segu3, 0, -0.45);
+    Polygon_vertex2d.pan(segu4, 0, -0.4);
+    Polygon_vertex2d.pan(segu5, 0, -0.35);
 
   }
 
   setTimeout(() => {
     clearInterval(pruun_);
-  }, 20000);
+  }, 60000);
 
 
 window.addEventListener("mousedown", function () {
